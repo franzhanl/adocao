@@ -1,0 +1,523 @@
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand" href="#page-top">Adocão</a>
+                <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <!--<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#about">About</a></li> -->
+                        <!--<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#contact">Contact</a></li>-->
+
+                        <li class="nav-item mx-0 mx-lg-1"><%= link_to 'quero adotar', '#portfolio', class:"nav-link py-3 px-0 px-lg-3 rounded" %></li>
+                        <% if user_signed_in? %>
+                            <!-- Loged buttons -->
+                            <li class="nav-item mx-0 mx-lg-1"><%= link_to 'Anunciar Animal', '#', "data-bs-toggle":"modal", "data-bs-target":"#portfolioModal2", class:"nav-link py-3 px-0 px-lg-3 rounded" %></li>
+                            <li class="nav-item mx-0 mx-lg-1"><%= link_to 'Sair', destroy_user_session_path, method: :delete, class:"nav-link py-3 px-0 px-lg-3 rounded" %></li>
+                            <li class="nav-item mx-0 mx-lg-1"><small><%= link_to current_user.first_name, '', class:"nav-link py-3 px-0 px-lg-3 rounded" %></small></li>
+                        <% else %>
+                        <!-- Not loged buttons -->
+                            <li class="nav-item mx-0 mx-lg-1"><%= link_to 'Login', '#', "data-bs-toggle":"modal", "data-bs-target":"#portfolioModal1", class:"nav-link py-3 px-0 px-lg-3 rounded" %></li>
+                            <li class="nav-item mx-0 mx-lg-1"><%= link_to 'Criar Conta', '#', "data-bs-toggle":"modal", "data-bs-target":"#portfolioModal3", class:"nav-link py-3 px-0 px-lg-3 rounded" %></li>
+                        <% end %>
+
+                        
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Masthead-->
+        <header class="masthead bg-primary text-white text-center">
+            <div class="container d-flex align-items-center flex-column">
+                <!-- Masthead Avatar Image-->
+                <%= image_tag 'dog-logo.png', class:"masthead-avatar mb-5" %>
+                <!-- Masthead Heading-->
+                <h1 class="masthead-heading text-uppercase mb-0">Adocão</h1>
+                <!-- Icon Divider-->
+                <div class="divider-custom divider-light">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
+                </div>
+                <!-- Masthead Subheading-->
+                <p class="masthead-subheading font-weight-light mb-0">Adote um animalzinho</p>
+            </div>
+        </header>
+        <!-- Portfolio Section-->
+        <section class="page-section portfolio" id="portfolio">
+            <div class="container">
+                <!-- Portfolio Section Heading-->
+                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Animais para adoção</h2>
+                <!-- Icon Divider-->
+                <div class="divider-custom">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
+                </div>
+                <!-- Portfolio Grid Items Animals-->
+                    <div class="row justify-content-center">
+                        <!-- Portfolio Item Animal-->
+                        <% if @animals.empty? %>
+                            <div class="row col-md-12 text-center"><h1>Sem pets para adotar</h1></div>
+                            <div class="col-md-6 col-lg-4 mb-5">
+                                <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal2">
+                                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                                        <div class="portfolio-item-caption-content text-center text-white">
+                                        <p> Cadastre um animalzinho </p>
+                                        </div>
+                                    </div>
+                                    <%= image_tag 'cat-dog.png', class:"img-fluid" %>
+                                </div>
+                            </div>
+                        <% else %>
+                            <% @animals.each do |animal| %>
+                                <div class="col-md-6 col-lg-4 mb-5">
+                                    <%= link_to animal_path(animal.id), remote: true do %>
+                                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal4">
+                                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                                                <div class="portfolio-item-caption-content text-center text-white">
+                                                    <p><%= animal.animal_name %></p>
+                                                    <p><%= animal.animal_gender %></p>
+                                                    <p><%= animal.user_id %></p>
+                                                </div>
+                                            </div>
+                                            <% if animal.avatar.attached? %>
+                                                <%= image_tag(animal.avatar, width:"100%", height:"250px" ) %>
+                                            <% else %>
+                                                <%= image_tag 'cat-dog.png', class:"img-fluid" %>
+                                            <% end %>
+                                        </div>
+                                    <% end %>
+                                </div>
+                            <% end %>
+                        <% end %>
+                    </div>
+            </div>
+        <div class="d-flex justify-content-center">
+            <%= paginate @animals %>
+        </div>
+        </section>
+        <!-- About Section-->
+        <section class="page-section bg-primary text-white mb-0" id="about">
+            <div class="container">
+                <!-- About Section Heading-->
+                <h2 class="page-section-heading text-center text-uppercase text-white">Sobre</h2>
+                <!-- Icon Divider-->
+                <div class="divider-custom divider-light">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
+                </div>
+                <!-- About Section Content-->
+                <div class="row">
+                    <div class="col-lg-4 ms-auto"><p class="lead">Mussum Ipsum, cacilds vidis litro abertis. Nec orci ornare consequat. Praesent lacinia ultrices consectetur. Sed non ipsum felis.Vehicula non. Ut sed ex eros. Vivamus sit amet nibh non tellus tristique interdum.Sapien in monti palavris qui num significa nadis i pareci latim.Atirei o pau no gatis, per gatis num morreus.</p></div>
+                    <div class="col-lg-4 me-auto"><p class="lead">Mussum Ipsum, cacilds vidis litro abertis. Delegadis gente finis, bibendum egestas augue arcu ut est.Detraxit consequat et quo num tendi nada.Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis.Mais vale um bebadis conhecidiss, que um alcoolatra anonimis.Mussum Ipsum, cacilds vidis litro abertis. Delegadis gente finis, bibendum egestas augue arcu ut est.Detraxit consequat et quo num tendi nada.Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis.Mais vale um bebadis conhecidiss, que um alcoolatra anonimis.</p></div>
+                </div>
+                <!-- About Section Button-->
+                <div class="text-center mt-4">
+                    <a class="btn btn-xl btn-outline-light" href="https://startbootstrap.com/theme/freelancer/">
+                        <i class="fas fa-download me-2"></i>
+                        Free Download!
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer-->
+        <footer class="footer text-center">
+            <div class="container">
+                <div class="row">
+                    <!-- Footer Location-->
+                    <div class="col-lg-4 mb-5 mb-lg-0">
+                        <h4 class="text-uppercase mb-4">Desenvolvedor</h4>
+                        <p class="lead mb-0">
+                            Franz Richard Hanl Neto
+                        </p>
+                    </div>
+                    <!-- Footer Social Icons-->
+                    <div class="col-lg-4 mb-5 mb-lg-0">
+                        <h4 class="text-uppercase mb-4">Entrar em contato</h4>
+                        <a class="btn btn-outline-light btn-social mx-1" href="https://github.com/franzhanl"><i class="fab fa-fw fa-github"></i></a>
+                        <a class="btn btn-outline-light btn-social mx-1" href="https://linkedin.com/in/franz-hanl"><i class="fab fa-fw fa-linkedin-in"></i></a>
+                    </div>
+                    <!-- Footer About Text-->
+                    <div class="col-lg-4">
+                        <h4 class="text-uppercase mb-4">Email</h4>
+                        <p class="lead mb-0">
+                            franz.hanl@hotmail.com
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Copyright Section-->
+        <div class="copyright py-4 text-center text-white">
+            <div class="container"><small>Copyright &copy; 2022</small></div>
+        </div>
+        <!-- Portfolio Modal 1 -->
+        <!-- Login user-->
+        <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" aria-labelledby="portfolioModalLogin" aria-hidden="true">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                    <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                    <div class="modal-body text-center pb-5">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <!-- Portfolio Modal - Title-->
+                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Login</h2>
+                                    <!-- Icon Divider-->
+                                    <div class="divider-custom">
+                                        <div class="divider-custom-line"></div>
+                                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                        <div class="divider-custom-line"></div>
+                                    </div>
+
+                                    <!-- Login Form -->
+                                    <div class="container-md">
+                                    <%= form_with(url: new_user_session_path, model: User, local: true) do |form| %>
+                                        <div class="form-group">
+                                            <%= form.label :email %>
+                                            <%= form.text_field :email, class:'form-control form-control-user', placeholder:'exemplo@hotmail.com' %>
+                                        </div>
+                                        <div class="form-group">
+                                            <%= form.label :password %>
+                                            <%= form.password_field :password, class:'form-control form-control-user', placeholder:'Senha' %>
+                                        </div>
+
+                                        <hr>
+                                    
+                                    </div>
+                                    <!-- Buttons -->
+                                    <button type="submit" class="btn btn-primary btn-user btn-block"> Entrar </button>
+                                    <% end %>
+                                    <button class="btn btn-danger" data-bs-dismiss="modal">
+                                        <i class="fas fa-xmark fa-fw"></i>
+                                        Cancelar
+                                    </button>
+                                    
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Portfolio Modal 2 -->
+        <!-- New animal-->
+        <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" aria-labelledby="portfolioModal2" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                    <div class="modal-body text-center pb-5">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-9">
+                                    <!-- Portfolio Modal - Title-->
+                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Dados Pet</h2>
+                                    <!-- Icon Divider-->
+                                    <div class="divider-custom">
+                                        <div class="divider-custom-line"></div>
+                                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                        <div class="divider-custom-line"></div>
+                                    </div>
+                            
+                                    <!--Animal Form -->
+                                    <div class="container-md">
+                                    <%= form_with(model: Animal , local: true) do |form| %>
+                                        <div class="form-group col-md-12">
+                                            <%= form.label :animal_name %>
+                                            <%= form.text_field :animal_name, class:'form-control form-control-user' %>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-3">
+                                                <%= form.label :animal_type %>
+                                                <%= form.select :animal_type, ['Cachorro', 'Gato', 'Passaro'], {include_blank: "Escolha"}, class:'form-control form-control-user' %>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <%= form.label :animal_size %>
+                                                <%= form.select :animal_size, ['Pequeno', 'Médio', 'Grande'], {include_blank: "Esccolha"}, class:'form-control form-control-user'%>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <%= form.label :animal_age %>
+                                                <%= form.text_field :animal_age, class:'form-control form-control-user'%>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <%= form.label :animal_gender %>
+                                                <%= form.select :animal_gender, ['Macho', 'Fêmea'], {include_blank: "Escolha"}, class:'form-control form-control-user'%>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <%= form.label :animal_description %>
+                                            <%= form.text_area :animal_description, class:'form-control form-control-user'%>
+                                        </div>
+                                        <div class="form-group">
+                                            <%= form.label :avatar %>
+                                            <%= form.file_field :avatar, class:'form-control form-control-user'%>
+                                        </div>
+                                        <div class="form-group">
+                                            <%= form.hidden_field :user_id %>
+                                            <%= form.hidden_field :user_id, value: current_user.id  ,class:'form-control form-control-user' if user_signed_in? %>
+                                                
+                                        </div>
+
+                                        <hr>
+                                        
+                                    </div>
+                                    <!-- Buttons -->
+                                    <button type="submit" class="btn btn-primary btn-user btn-block"> Salvar </button>
+                                    <% end %>
+                                    <button class="btn btn-danger" data-bs-dismiss="modal">
+                                        <i class="fas fa-xmark fa-fw"></i>
+                                        Cancelar
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Portfolio Modal 3-->
+        <!-- New user-->
+        <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" aria-labelledby="portfolioModal3" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                    <div class="modal-body text-center pb-5">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-10">
+                                    <!-- Portfolio Modal - Title-->
+                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Novo Usuário</h2>
+                                    <!-- Icon Divider-->
+                                    <div class="divider-custom">
+                                        <div class="divider-custom-line"></div>
+                                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                        <div class="divider-custom-line"></div>
+                                    </div>   
+                                    <div class="modal-body">
+                                        <!--New User Form -->
+                                        <div class="container-md">
+                                            <%= form_with(url: user_profile_index_path ,model: User, local: false ) do |form| %>
+                                                <div class="row">
+                                                    <div class="form-group col-md-6">
+                                                        <%= form.label :first_name %><br />
+                                                        <%= form.text_field :first_name, autofocus: true, autocomplete: "email", class:'form-control form-control-user', id:'user_first_name' %>
+                                                    </div>
+
+                                                    <div class="form-group col-md-6">
+                                                        <%= form.label :last_name %><br />
+                                                        <%= form.text_field :last_name, autofocus: true, autocomplete: "email", class:'form-control form-control-user' %>
+                                                    </div>
+                                                </div>
+
+                                                <div class="field">
+                                                    <%= form.label :address %><br />
+                                                    <%= form.text_field :address, autofocus: true, autocomplete: "email", class:'form-control form-control-user' %>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="form-group col-md-4">
+                                                        <%= form.label :gender %><br />
+                                                        <%= form.select :gender, ['Masculino', 'Feminino', 'Outros'], {include_blank: "Escolha"}, class:'form-control form-control-user'%>
+                                                    </div>
+
+                                                    <div class="form-group col-md-4">
+                                                        <%= form.label :birthday %><br />
+                                                        <%= form.date_field :birthday, autofocus: true, autocomplete: "email", class:'form-control form-control-user' %>
+                                                    </div>
+
+                                                    <div class="form-group col-md-4">
+                                                        <%= form.label :phone %><br />
+                                                        <%= form.text_field :phone, autofocus: true, autocomplete: "email", class:'form-control form-control-user' %>
+                                                    </div>
+                                                </div>
+
+                                                <div class="field">
+                                                    <%= form.label :email %><br />
+                                                    <%= form.email_field :email, autofocus: true, autocomplete: "email", class:'form-control form-control-user' %>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="form-group col-md-6">
+                                                        <%= form.label :password %>
+                                                        <% if @minimum_password_length %>
+                                                        <em>(<%= @minimum_password_length %> characters minimum)</em>
+                                                        <% end %><br />
+                                                        <%= form.password_field :password, autocomplete: "new-password", class:'form-control form-control-user' %>
+                                                    </div>
+
+                                                    <div class="form-group col-md-6">
+                                                        <%= form.label :password_confirmation %><br />
+                                                        <%= form.password_field :password_confirmation, autocomplete: "new-password", class:'form-control form-control-user' %>
+                                                    </div>
+                                                </div>
+                                            <hr>
+                                        </div>  
+                                        <!-- Buttons -->
+                                        <button type="submit" class="btn btn-primary btn-user btn-block"> Salvar </button>
+                                            <% end %><!-- end user form -->
+                                        <button class="btn btn-danger" data-bs-dismiss="modal">
+                                            <i class="fas fa-xmark fa-fw"></i>
+                                            Cancelar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Portfolio Modal 4-->
+        <!-- Show Animal-->
+        <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" aria-labelledby="portfolioModal4" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                    <div class="modal-body text-center pb-5">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-9">
+                                    <!-- Portfolio Modal - Title-->
+                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Pet</h2>
+                                    <!-- Icon Divider-->
+                                    <div class="divider-custom">
+                                        <div class="divider-custom-line"></div>
+                                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                        <div class="divider-custom-line"></div>
+                                    </div>
+                                    <%= form_with(model: Animal , local: true) do |form| %>
+                                        <div class="form-group col-md-12">
+                                            <%= form.label :animal_id %>
+                                            <%= form.text_field :animal_id, class:'form-control form-control-user', readonly: true, id:'animal_id' %>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <%= form.label :animal_name %>
+                                            <%= form.text_field :animal_name, class:'form-control form-control-user', readonly: true, id:'animal_name' %>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-3">
+                                                <%= form.label :animal_type %>
+                                                <%= form.text_field :animal_type, class:'form-control form-control-user', readonly: true, id:'animal_type' %>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <%= form.label :animal_size %>
+                                                <%= form.text_field :animal_size, class:'form-control form-control-user', readonly: true, id:'animal_size' %>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <%= form.label :animal_age %>
+                                                <%= form.text_field :animal_age, class:'form-control form-control-user', readonly: true, id:'animal_age' %>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <%= form.label :animal_gender %>
+                                                <%= form.text_field :animal_gender, class:'form-control form-control-user', readonly: true, id:'animal_gender' %>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <%= form.label :animal_description %>
+                                            <%= form.text_area :animal_description, class:'form-control form-control-user', readonly: true, id:'animal_description' %>
+                                        </div>
+                                        <div class="form-group">       
+                                            <%= form.label :avatar %>                                     
+                                            <%= image_tag( '', class:"form-control form-control-user", id:'avatar' ) %>
+                                        </div>
+                                        <div class="form-group">
+                                            <%= form.label :user_id %>
+                                            <%= form.text_field $user_id ,class:'form-control form-control-user', readonly: true, id:'user_id' %>
+                                                
+                                        <hr>
+
+                                        <!-- Buttons -->
+                                        <!-- <button type="submit" class="btn btn-primary btn-user btn-block" > Salvar </button> -->
+                                        <%= link_to 'Editar', '', id:"edit_btn", class:"btn btn-primary btn-user btn-block"  %>
+                                        <%= link_to 'Excluir', animal_path(0), id:'delete_btn', class:'btn btn-danger btn-user btn-block', method: :delete, data: { confirm: 'Deseja realmente excluir?'} %> <!-- link alterado via js (views/animals/show.js.erb) -->
+                                    
+                                    <% end %>
+                                    </div>
+                                    
+                                    <!-- Optional close modal button -->
+                                <!--<button class="btn btn-primary" data-bs-dismiss="modal">
+                                        <i class="fas fa-xmark fa-fw"></i>
+                                        Close Window
+                                    </button>
+                                -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Portfolio Modal 5-->
+        <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" aria-labelledby="portfolioModal5" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                    <div class="modal-body text-center pb-5">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <!-- Portfolio Modal - Title-->
+                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Locked Safe</h2>
+                                    <!-- Icon Divider-->
+                                    <div class="divider-custom">
+                                        <div class="divider-custom-line"></div>
+                                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                        <div class="divider-custom-line"></div>
+                                    </div>
+                                    <!-- Portfolio Modal - Image--
+                                    <img class="img-fluid rounded mb-5" src="assets/img/portfolio/safe.png" alt="..." /> -->
+                                    <!-- Portfolio Modal - Text-->
+                                    <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                                    <button class="btn btn-primary" data-bs-dismiss="modal">
+                                        <i class="fas fa-xmark fa-fw"></i>
+                                        Close Window
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Portfolio Modal 6-->
+        <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" aria-labelledby="portfolioModal6" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                    <div class="modal-body text-center pb-5">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <!-- Portfolio Modal - Title-->
+                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Submarine</h2>
+                                    <!-- Icon Divider-->
+                                    <div class="divider-custom">
+                                        <div class="divider-custom-line"></div>
+                                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                        <div class="divider-custom-line"></div>
+                                    </div>
+                                    <!-- Portfolio Modal - Image--
+                                    <img class="img-fluid rounded mb-5" src="assets/img/portfolio/submarine.png" alt="..." />-->
+                                    <!-- Portfolio Modal - Text-->
+                                    <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                                    <button class="btn btn-primary" data-bs-dismiss="modal">
+                                        <i class="fas fa-xmark fa-fw"></i>
+                                        Close Window
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        

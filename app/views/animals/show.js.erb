@@ -1,0 +1,46 @@
+//alert('<%= $show_animal.inspect %>'); //testa informação recebida
+
+loadAnimalAvatar();
+loadAnimalData();
+loadUserData();
+fixDeleteButton();
+checkEditPermissionUser()
+
+function loadAnimalAvatar() {
+  <% if $show_animal.avatar.attached? %>
+    document.querySelector("#avatar").src = '<%= url_for($show_animal.avatar) %>';  
+  <% else %>
+    document.querySelector("#avatar").src = '<%= image_path('cat-dog.png') %>';
+  <% end %>
+};
+
+function loadAnimalData() {
+  //Carrega os dados do animal no formulario dentro do modal.
+  document.querySelector("#animal_id").value = '<%= $show_animal.id %>';
+  document.querySelector("#animal_name").value = '<%= $show_animal.animal_name %>';
+  document.querySelector("#animal_type").value = '<%= $show_animal.animal_type %>';
+  document.querySelector("#animal_size").value = '<%= $show_animal.animal_size %>';
+  document.querySelector("#animal_age").value = '<%= $show_animal.animal_age %>';
+  document.querySelector("#animal_gender").value = '<%= $show_animal.animal_gender %>';
+  document.querySelector("#animal_description").value = '<%= $description_animal %>';
+};
+
+function loadUserData() {
+  //Dados do dono do animal
+  document.querySelector("#user_id").value = '<%= $show_animal.user_id %>';
+};
+
+function fixDeleteButton() {
+// Altera o link de exclusão mantendo o controller atual e adiciona o parametro do animal recebido
+$('#delete_btn').attr('href', '/'+"<%= params[:controller] %>"+'/'+'<%= $show_animal.id %>');
+};
+
+function checkEditPermissionUser() {
+  <% if $show_animal.user_id == $logged_user_id %>
+    document.querySelector("#edit_btn").hidden = false;
+    document.querySelector("#delete_btn").hidden = false;
+  <% else %>
+    document.querySelector("#edit_btn").hidden = true;
+    document.querySelector("#delete_btn").hidden = true;
+  <% end %>
+};

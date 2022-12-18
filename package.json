@@ -1,0 +1,12 @@
+{
+  "name": "adocao",
+  "private": true,
+  "dependencies": {
+    "bootstrap-growl-ifightcrime": "^1.1.0",
+    "jquery": "1.11"
+  },
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Franz <franz.hanl@hotmail.com>",
+  "license": "MIT"
+}
