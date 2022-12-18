@@ -1,24 +1,16 @@
-# README
+# Adocão - Sistema de adoção de animais
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Introdução 
 
-Things you may want to cover:
+  O intuito desse sistema é ser um facilitador na adoção de um animal de estimação(gato e cachorro), o sistema
+vai conter cadastro de usuário, onde cada usuário pode cadastrar um ou mais animais para adoção.
+  O usuário terá as funções de cadastrar novos animais, editar animais e excluir animais.
 
-* Ruby version
 
-* System dependencies
+Informações sobre o sistema:
 
-* Configuration
+* Ruby version - 2.5.9
 
-* Database creation
+* Rails - 5.2.8
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Database - PostgreSQL
