@@ -223,7 +223,10 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   kaminari (~> 1.1.0)
   listen (>= 3.0.5, < 3.2)
+<<<<<<< HEAD
   mini_portile2 (~> 2.4)
+=======
+>>>>>>> d584aa15a1c669f77c6e9f44343bc15b31dbd662
   puma (~> 3.11)
   rails (~> 5.2.8, >= 5.2.8.1)
   rails-i18n (~> 5.1)
@@ -237,7 +240,11 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 RUBY VERSION
+<<<<<<< HEAD
    ruby 2.5.9p229
+=======
+   ruby 2.4.10p364
+>>>>>>> d584aa15a1c669f77c6e9f44343bc15b31dbd662
 
 BUNDLED WITH
    1.17.3

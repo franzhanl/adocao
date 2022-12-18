@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Adocão - Sistema de adoção de animais
 
 Introdução 
@@ -14,3 +15,29 @@ Informações sobre o sistema:
 * Rails - 5.2.8
 
 * Database - PostgreSQL
+=======
+# README
+
+This README would normally document whatever steps are necessary to get the
+application up and running.
+
+Things you may want to cover:
+
+* Ruby version
+
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
+>>>>>>> d584aa15a1c669f77c6e9f44343bc15b31dbd662

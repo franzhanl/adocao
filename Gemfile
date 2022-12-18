@@ -1,7 +1,11 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
+<<<<<<< HEAD
 ruby '2.5.9'
+=======
+ruby '2.4.10'
+>>>>>>> d584aa15a1c669f77c6e9f44343bc15b31dbd662
 
 #--------gems manually added ----------
 gem 'devise'
@@ -10,8 +14,11 @@ gem 'kaminari', '~> 1.1.0'
 #--------/gems manually added ----------
 
 
+<<<<<<< HEAD
 gem 'mini_portile2', '~> 2.4'
 
+=======
+>>>>>>> d584aa15a1c669f77c6e9f44343bc15b31dbd662
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.8', '>= 5.2.8.1'
 # Use sqlite3 as the database for Active Record
