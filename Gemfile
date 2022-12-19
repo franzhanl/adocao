@@ -7,6 +7,7 @@ ruby '2.5.9'
 gem 'devise'
 gem 'rails-i18n', '~> 5.1'
 gem 'kaminari', '~> 1.1.0'
+gem 'pg', '~> 0.18.4'
 #--------/gems manually added ----------
 
 
