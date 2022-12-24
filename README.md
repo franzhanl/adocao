@@ -2,37 +2,37 @@
 
 
 <p>
-  ## Página inicial 
+  <h2> Página inicial </h2>
   <img src="app/assets/images/portfolio/home.png">
 </p>
 
 <p>
-  ## Quero adotar 
+  <h2> Quero adotar </h2>
   <img src="app/assets/images/portfolio/animals.png">
 </p>
 
 <p>
-  ## Prévia do animal 
+  <h2> Prévia do animal </h2>
   <img src="app/assets/images/portfolio/hover_animal.png">
 </p>
 
 <p>
-  ## Informações do animal 
+  <h2> Informações do animal </h2>
   <img src="app/assets/images/portfolio/show_animal.png">
 </p>
 
 <p>
-  ## Criar usuário 
+  <h2> Criar usuário </h2>
   <img src="app/assets/images/portfolio/new_user.png">
 </p>
 
 <p>
-  ## Login 
+  <h2> Login </h2>
   <img src="app/assets/images/portfolio/login.png">
 </p>
 
 <p>
-  ## Cadastrando animal
+  <h2> Cadastrando animal </h2>
   <img src="app/assets/images/portfolio/new_animal.png">
 </p>
 
