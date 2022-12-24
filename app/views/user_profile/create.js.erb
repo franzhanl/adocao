@@ -1,7 +1,4 @@
-//show all notices
-'<% flash[:notice].each do |message| %>'
-  show_notice('<%= message %>');
-'<% end %>'
+
 
 function show_notice(mensagem) {
   $.bootstrapGrowl(mensagem, {
@@ -14,4 +11,16 @@ function show_notice(mensagem) {
     allow_dismiss: false, // If true then will display a cross to close the popup.
     stackup_spacing: 10 // spacing between consecutively stacked growls.
   });
+
+  //show all notices
+  function showErrorMessage() {
+  '<% flash[:notice].each do |message| %>'
+    show_notice('<%= message %>');
+  '<% end %>'//show all notices
+  '<% flash[:notice].each do |message| %>'
+    show_notice('<%= message %>');
+  '<% end %>'
+};
+    
+
 };

@@ -4,11 +4,7 @@ loadAnimalAvatar();
 loadAnimalData();
 loadUserData();
 fixDeleteButton();
-<<<<<<< HEAD
 checkEditPermissionUser()
-=======
-
->>>>>>> d584aa15a1c669f77c6e9f44343bc15b31dbd662
 
 function loadAnimalAvatar() {
   <% if $show_animal.avatar.attached? %>
@@ -37,7 +33,6 @@ function loadUserData() {
 function fixDeleteButton() {
 // Altera o link de exclusão mantendo o controller atual e adiciona o parametro do animal recebido
 $('#delete_btn').attr('href', '/'+"<%= params[:controller] %>"+'/'+'<%= $show_animal.id %>');
-<<<<<<< HEAD
 };
 
 function checkEditPermissionUser() {
@@ -48,6 +43,4 @@ function checkEditPermissionUser() {
     document.querySelector("#edit_btn").hidden = true;
     document.querySelector("#delete_btn").hidden = true;
   <% end %>
-=======
->>>>>>> d584aa15a1c669f77c6e9f44343bc15b31dbd662
 };
