@@ -2,31 +2,31 @@
 
 
 <p>
-  <img src="app/assets/images/portifolio/home.png">
+  <img src="app/assets/images/portfolio/home.png">
 </p>
 
 <p>
-  <img src="app/assets/images/portifolio/animals.png">
+  <img src="app/assets/images/portfolio/animals.png">
 </p>
 
 <p>
-  <img src="app/assets/images/portifolio/hover_animal.png">
+  <img src="app/assets/images/portfolio/hover_animal.png">
 </p>
 
 <p>
-  <img src="app/assets/images/portifolio/show_animal.png">
+  <img src="app/assets/images/portfolio/show_animal.png">
 </p>
 
 <p>
-  <img src="app/assets/images/portifolio/new_user.png">
+  <img src="app/assets/images/portfolio/new_user.png">
 </p>
 
 <p>
-  <img src="app/assets/images/portifolio/login.png">
+  <img src="app/assets/images/portfolio/login.png">
 </p>
 
 <p>
-  <img src="app/assets/images/portifolio/new_animal.png">
+  <img src="app/assets/images/portfolio/new_animal.png">
 </p>
 
 ##Introdução 
